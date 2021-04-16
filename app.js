@@ -8,6 +8,7 @@ const {API_VERSION} = require("./config");
 //const userRoutes = require("./routers/user");
 const authRoute = require ('./routers/auth');
 const empresaRoute = require("./routers/empresa");
+const productoRoute = require("./routers/producto");
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
@@ -18,5 +19,6 @@ app.use(bodyParser.json());
 //Router Basic
 app.use(`/api/${API_VERSION}`, authRoute);
 app.use(`/api/${API_VERSION}`, empresaRoute);
+app.use(`/api/${API_VERSION}`, productoRoute);
 
 module.exports = app;

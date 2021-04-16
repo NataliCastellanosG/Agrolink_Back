@@ -3,12 +3,12 @@ const moment = require("moment");
 
 const SECRET_KEY ="alb2bum2021nmkst";
 
-exports.createAccessToken = function(user){
+exports.createAccessToken = function(empresa){
     const payload={
-        id: user._id,
-        rol: user.rol,
-        nombre: user.nombre,
-        nit: user.nit,
+        id: empresa._id,
+        rol: empresa.rol,
+        nombre: empresa.nombre,
+        nit: empresa.nit,
         createToken: moment().unix(),
         exp: moment().add(3, "hours").unix()
     };
@@ -16,10 +16,10 @@ exports.createAccessToken = function(user){
     return jwt.encode(payload, SECRET_KEY);
 };
 
-exports.createRefreshToken = function(user){
+exports.createRefreshToken = function(empresa){
 
     const payload={
-        id: user._id,
+        id: empresa._id,
         exp: moment().add(30, "days").unix()
     };
 

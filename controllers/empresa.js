@@ -66,7 +66,7 @@ function inicioSesion(req, res){
     const params = req.body;
     const correo_electronico = params.correo_electronico.toLowerCase();
     const contrasena = params.contrasena;
-
+    console.log(params);
     Empresa.findOne({correo_electronico}, (err, empresaStored) => {
         if(err){
             res.status(500).send({message: "Error del servidor"});
@@ -97,7 +97,25 @@ function inicioSesion(req, res){
     });
 }
 
+function mostrarEmpresa(req, res){
+  Empresa.findOne({ _id: req.body._id },
+                    "asociacion rol nombre nit representante_legal cedula_representante_legal correo_electronico departamento municipio resena", 
+                    (err, empresaStored) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    }else{
+      if (!empresaStored) {
+        res.status(404).send({ message: "No se ha encontrado la empresa" });
+      }else {
+          console.log(empresaStored);
+          res.status(200).send({ empresaStored });
+        }
+      }
+    });
+}
+
 module.exports = {
     registrarEmpresa,
-    inicioSesion
+    inicioSesion,
+    mostrarEmpresa
 };

@@ -36,6 +36,17 @@ function registrarProducto(req, res){
     }
 }
 
+function obtenerProductos(req, res){
+    Producto.find().then(productos =>{
+        if(!productos){
+            res.status(404).send({message:"No existen productos registrados"});
+        }else{
+            res.status(200).send({productos});
+        }
+    })
+}
+
 module.exports = {
-    registrarProducto
+    registrarProducto,
+    obtenerProductos
 };
