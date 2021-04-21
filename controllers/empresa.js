@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt-nodejs");
 const jwt = require("../services/jwt");
-
 const Empresa = require("../models/empresa");
 
 function registrarEmpresa(req, res){
@@ -98,20 +97,37 @@ function inicioSesion(req, res){
 }
 
 function mostrarEmpresa(req, res){
-  Empresa.findOne({ _id: req.body._id },
-                    "asociacion rol nombre nit representante_legal cedula_representante_legal correo_electronico departamento municipio resena", 
-                    (err, empresaStored) => {
+    Empresa.findOne({_id: req.params.id},
+                        "asociacion rol nombre nit representante_legal cedula_representante_legal correo_electronico departamento municipio resena", 
+                        (err, empresa) => {
+        if (err) {
+        res.status(500).send({ message: "Error del servidor."+ err.message });
+        }else{
+        if (!empresa) {
+            res.status(404).send({ message: "No se ha encontrado la empresa" });
+        }else {
+            res.status(200).send({ empresa});
+            }
+        }
+        });
+}
+
+function deleteUser(req, res) {
+  const { id } = req.params;
+
+  User.findByIdAndRemove(id, (err, userDeleted) => {
     if (err) {
       res.status(500).send({ message: "Error del servidor." });
-    }else{
-      if (!empresaStored) {
-        res.status(404).send({ message: "No se ha encontrado la empresa" });
-      }else {
-          console.log(empresaStored);
-          res.status(200).send({ empresaStored });
-        }
+    } else {
+      if (!userDeleted) {
+        res.status(404).send({ message: "Usuario no encontrado." });
+      } else {
+        res
+          .status(200)
+          .send({ message: "El usuario ha sido eliminado correctamente." });
       }
-    });
+    }
+  });
 }
 
 module.exports = {
