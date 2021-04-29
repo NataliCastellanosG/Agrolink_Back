@@ -59,7 +59,24 @@ function obtenerProductos(req, res) {
   });
 }
 
+function obtenerProductosActivos(req, res) {
+  const query = req.query;
+  console.log(req.params);
+
+  Producto.find({
+    empresaid: req.params.empresaid,
+    active: query.active,
+  }).then((productos) => {
+    if (!productos) {
+      res.status(404).send({ message: "No existen productos registrados" });
+    } else {
+      res.status(200).send({ productos });
+    }
+  });
+}
+
 module.exports = {
   registrarProducto,
   obtenerProductos,
+  obtenerProductosActivos,
 };
