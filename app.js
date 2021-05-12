@@ -9,6 +9,7 @@ const { API_VERSION } = require("./config");
 const authRoute = require("./routers/auth");
 const empresaRoute = require("./routers/empresa");
 const productoRoute = require("./routers/producto");
+const asociacionRoute = require("./routers/asociacion");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -30,5 +31,6 @@ app.use((req, res, next) => {
 app.use(`/api/${API_VERSION}`, authRoute);
 app.use(`/api/${API_VERSION}`, empresaRoute);
 app.use(`/api/${API_VERSION}`, productoRoute);
+app.use(`/api/${API_VERSION}`, asociacionRoute);
 
 module.exports = app;
