@@ -10,9 +10,6 @@ api.post(
   AsociacionController.registrarAsociacion
 );
 //Petición para obtener todas las asociaciones
-api.get(
-  "/asociaciones",
-  [md_auth.ensureAuth],
-  AsociacionController.obtenerAsociacionesActivas
-);
+api.get("/asociaciones", AsociacionController.obtenerAsociacionesActivas);
+
 module.exports = api;

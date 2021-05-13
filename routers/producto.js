@@ -31,11 +31,9 @@ api.put(
   [md_auth.ensureAuth, md_cargar_imagen],
   ProductoController.cargarImagen
 );
-api.get(
-  "/obtener-imagen/:imagenName",
-  [md_auth.ensureAuth],
-  ProductoController.obtenerImagen
-);
+//Petición para obtener la imagen
+api.get("/obtener-imagen/:imagenName", ProductoController.obtenerImagen);
+//Petición para actualizar la información del producto
 api.put(
   "/actualizar-producto/:id",
   [md_auth.ensureAuth],

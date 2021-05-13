@@ -25,14 +25,9 @@ api.put(
 );
 api.get(
   "/obtener-cc/:camara_comercioName",
-  [md_auth.ensureAuth],
   EmpresaController.obtenerCamaraComercio
 );
-api.get(
-  "/obtener-rut/:rutName",
-  [md_auth.ensureAuth],
-  EmpresaController.obtenerRut
-);
+api.get("/obtener-rut/:rutName", EmpresaController.obtenerRut);
 api.put(
   "/actualizar-empresa/:id",
   [md_auth.ensureAuth],
